@@ -1,0 +1,33 @@
+$backGround: #282c34;
+// $backGround: red;
+//sass features: nesting, 
+
+.App {
+  text-align: center;
+  background-color: $backGround;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  color: white;
+}
+
+button{
+  display: inline;
+  margin: auto;
+  &:hover{
+    // background: $backGround;
+  }
+}
+
+a{
+  text-decoration-line: none;
+}
+
+.brewSummery{
+  border: 1px solid  #00aeff ;
+  border-left: 0px;
+  border-right: 0px;
+  padding-bottom: 1em;
+}
