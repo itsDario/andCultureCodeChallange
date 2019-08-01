@@ -45,7 +45,7 @@ export default class BarContainer extends Component {
     render() {
         return (
             <Fragment>
-                <div className="belt">
+                <div className="brewBody">
                     {this.details()}
                 </div>
             </Fragment>

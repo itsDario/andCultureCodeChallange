@@ -1,6 +1,9 @@
 $backGround: #282c34;
 // $backGround: red;
 //sass features: nesting, 
+*{
+  box-sizing: border-box;
+}
 
 .App {
   text-align: center;
@@ -16,9 +19,6 @@ $backGround: #282c34;
 button{
   display: inline;
   margin: auto;
-  &:hover{
-    // background: $backGround;
-  }
 }
 
 a{
@@ -26,8 +26,15 @@ a{
 }
 
 .brewSummery{
+  background-color: $backGround;
   border: 1px solid  #00aeff ;
-  border-left: 0px;
-  border-right: 0px;
   padding-bottom: 1em;
+  width:90vh;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.brewBody{
+  width: 100%;
+
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import BarContainer from './containers/BarContainer';
+import HeaderContainer from './containers/HeaderContainer';
 
 
 class App extends Component {
@@ -8,7 +9,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BarContainer className='content' />
+        <HeaderContainer />
+        <BarContainer />
       </div>
     );
   }
