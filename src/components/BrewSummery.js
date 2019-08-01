@@ -2,9 +2,6 @@ import React from 'react'
 
 const BrewSummery = (props) => {
 
-
-    console.log('key', `${process.env.REACT_APP_API_KEY}`)
-
     return (
         <div className='brewSummery'>
             <h2>{props.name}</h2>
