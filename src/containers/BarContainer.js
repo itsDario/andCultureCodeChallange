@@ -50,9 +50,11 @@ export default class BarContainer extends Component {
 
     details = () => {
         if (this.state.selected === '') {
-            return this.state.brews.map(brew => {
-                return <BrewSummery loadBrew={this.loadBrew} key={brew.id} {...brew} />
-            })
+            return <div>
+                <Navigation navigate={this.navigate} page={this.state.page} />
+                {this.state.brews.map(brew => <BrewSummery loadBrew={this.loadBrew} key={brew.id} {...brew} />)}
+                <Navigation navigate={this.navigate} page={this.state.page} />
+            </div>
         } else {
             return <BrewDetails {...this.state.selected} unloadBrew={this.unloadBrew} />
         }
@@ -61,11 +63,7 @@ export default class BarContainer extends Component {
     render() {
         return (
             <Fragment>
-                {this.state.selected === '' ? <Navigation navigate={this.navigate} page={this.state.page} /> : <span></span>}
-                <div className="brewBody">
-                    {this.details()}
-                </div>
-                {this.state.selected === '' ? <Navigation navigate={this.navigate} page={this.state.page} /> : <span></span>}
+                {this.details()}
             </Fragment >
         )
     }
