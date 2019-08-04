@@ -15,13 +15,22 @@ export default class BarContainer extends Component {
             selected: '',
             page: 1,
         }
+        // .then(x => console.log(this.state.brews))
+        this.fetchBreweryList(0)
+    }
 
-        fetch(`https://api.openbrewerydb.org/breweries?page=${this.state.page}&per_page=50&by_state=new_york`)
+    fetchBreweryList(pageChange) {
+        var newPage = this.state.page + pageChange
+        fetch(`https://api.openbrewerydb.org/breweries?page=${newPage}&per_page=50&by_state=new_york`)
             .then(res => res.json())
             .then(breweryPage => {
-                this.setState({ brews: breweryPage })
+                this.setState((prevState) => {
+                    return {
+                        brews: breweryPage,
+                        page: prevState.page + pageChange,
+                    }
+                })
             })
-        // .then(x => console.log(this.state.brews))
     }
 
     loadBrew = (deets) => {
@@ -33,17 +42,20 @@ export default class BarContainer extends Component {
     }
 
     nextPage() {
-        this.setState(prevState => {
-            return { page: prevState.page + 1 }
-        })
+        this.fetchBreweryList(1)
+        // console.log(this.state.page)
+        // this.setState(prevState => {
+        //     return { page: prevState.page + 1 }
+        // })
     }
 
     prevPage() {
-        if (this.state.page > 1) {
-            this.setState(prevState => {
-                return { page: prevState.page - 1 }
-            })
-        }
+        console.log('Prev')
+        this.fetchBreweryList(-1)
+        //     if (this.state.page > 1) {
+        //         this.fetchBreweryList(-1)
+        //         }
+        //     }
     }
 
     details = () => {
@@ -66,7 +78,7 @@ export default class BarContainer extends Component {
                 <div className="brewBody">
                     {this.details()}
                 </div>
-            </Fragment>
+            </Fragment >
         )
     }
 }
