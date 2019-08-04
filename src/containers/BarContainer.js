@@ -61,11 +61,11 @@ export default class BarContainer extends Component {
     render() {
         return (
             <Fragment>
-                <Navigation navigate={this.navigate} page={this.state.page} />
+                {this.state.selected === '' ? <Navigation navigate={this.navigate} page={this.state.page} /> : <span></span>}
                 <div className="brewBody">
                     {this.details()}
                 </div>
-                <Navigation navigate={this.navigate} page={this.state.page} />
+                {this.state.selected === '' ? <Navigation navigate={this.navigate} page={this.state.page} /> : <span></span>}
             </Fragment >
         )
     }
