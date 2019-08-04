@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 // import MoreButton from '../components/MoreButton'
 import BrewDetails from '../components/BrewDetails'
 import BrewSummery from '../components/BrewSummery'
+import Navigation from '../components/Navigation'
 
 export default class BarContainer extends Component {
     state = {
@@ -24,12 +25,14 @@ export default class BarContainer extends Component {
         fetch(`https://api.openbrewerydb.org/breweries?page=${newPage}&per_page=50&by_state=new_york`)
             .then(res => res.json())
             .then(breweryPage => {
-                this.setState((prevState) => {
-                    return {
-                        brews: breweryPage,
-                        page: prevState.page + pageChange,
-                    }
-                })
+                if (breweryPage.length > 0 && newPage > 0) {
+                    this.setState((prevState) => {
+                        return {
+                            brews: breweryPage,
+                            page: prevState.page + pageChange,
+                        }
+                    })
+                }
             })
     }
 
@@ -41,21 +44,8 @@ export default class BarContainer extends Component {
         this.setState({ selected: '' })
     }
 
-    nextPage() {
-        this.fetchBreweryList(1)
-        // console.log(this.state.page)
-        // this.setState(prevState => {
-        //     return { page: prevState.page + 1 }
-        // })
-    }
-
-    prevPage() {
-        console.log('Prev')
-        this.fetchBreweryList(-1)
-        //     if (this.state.page > 1) {
-        //         this.fetchBreweryList(-1)
-        //         }
-        //     }
+    navigate = (change) => {
+        this.fetchBreweryList(change)
     }
 
     details = () => {
@@ -71,10 +61,7 @@ export default class BarContainer extends Component {
     render() {
         return (
             <Fragment>
-                <div className="pageButtons">
-                    <button onClick={() => this.prevPage()}>Last Page</button>
-                    <button onClick={() => this.nextPage()}>Next Page</button>
-                </div>
+                <Navigation navigate={this.navigate} />
                 <div className="brewBody">
                     {this.details()}
                 </div>
