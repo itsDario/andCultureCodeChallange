@@ -1,11 +1,13 @@
-$backGround: #282c34;
+$background: #282c34;
+$border: #00aeff;
+
 *{
   box-sizing: border-box;
 }
 
 .App {
   text-align: center;
-  background-color: $backGround;
+  background-color: $background;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,20 +15,26 @@ $backGround: #282c34;
 }
 
 button{
+  margin-bottom: 1em;
   display: inline;
+  padding: .2em;
 }
 
 a{
+  color: white;
   text-decoration-line: none;
   &:visited{
     color: white;
   }
 }
 
+.pageDisplay{
+  margin: 2em;
+}
+
 .brewSummery{
-  background-color: $backGround;
-  border: 1px solid  #00aeff ;
-  padding-bottom: 1em;
+  background-color: $background;
+  border: 1px solid  $border ;
   width:90vh;
   max-width: 100%;
   margin: 0 auto;
