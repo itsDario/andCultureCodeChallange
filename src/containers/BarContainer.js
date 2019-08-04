@@ -32,6 +32,20 @@ export default class BarContainer extends Component {
         this.setState({ selected: '' })
     }
 
+    nextPage() {
+        this.setState(prevState => {
+            return { page: prevState.page + 1 }
+        })
+    }
+
+    prevPage() {
+        if (this.state.page > 1) {
+            this.setState(prevState => {
+                return { page: prevState.page - 1 }
+            })
+        }
+    }
+
     details = () => {
         if (this.state.selected === '') {
             return this.state.brews.map(brew => {
@@ -45,6 +59,10 @@ export default class BarContainer extends Component {
     render() {
         return (
             <Fragment>
+                <div className="pageButtons">
+                    <button onClick={() => this.prevPage()}>Last Page</button>
+                    <button onClick={() => this.nextPage()}>Next Page</button>
+                </div>
                 <div className="brewBody">
                     {this.details()}
                 </div>

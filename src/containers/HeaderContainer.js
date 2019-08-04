@@ -8,7 +8,7 @@ export default class BarContainer extends Component {
     render() {
         return (
             <div className="header">
-                <h1>Brewery List</h1>
+                <a href='https://and-culture-challange.herokuapp.com/'><h1>Brewery List</h1></a>
             </div>
         )
     }
