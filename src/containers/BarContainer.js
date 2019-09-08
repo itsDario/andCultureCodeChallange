@@ -5,9 +5,7 @@ import BrewSummery from '../components/BrewSummery'
 import Navigation from '../components/Navigation'
 
 export default class BarContainer extends Component {
-    state = {
-        page: 0
-    }
+
 
     constructor() {
         super();
@@ -15,6 +13,7 @@ export default class BarContainer extends Component {
             brews: [],
             selected: '',
             page: 1,
+            city: ''
         }
         // .then(x => console.log(this.state.brews))
         this.fetchBreweryList(0)
@@ -22,7 +21,11 @@ export default class BarContainer extends Component {
 
     fetchBreweryList(pageChange) {
         var newPage = this.state.page + pageChange
-        fetch(`https://api.openbrewerydb.org/breweries?page=${newPage}&per_page=50&by_state=new_york`)
+        var url = `https://api.openbrewerydb.org/breweries?page=${newPage}&per_page=50`
+        if (this.state.city.length > 0) {
+            url += `&by_state=${this.state.city}`
+        }
+        fetch(url)
             .then(res => res.json())
             .then(breweryPage => {
                 if (breweryPage.length > 0 && newPage > 0) {
@@ -48,9 +51,19 @@ export default class BarContainer extends Component {
         this.fetchBreweryList(change)
     }
 
+    updateCity = (e) => {
+        let city = e.target.value.toLowerCase();
+        city = city.split(' ').join('_')
+        if (e.target.value.length > 0) {
+            this.setState({ city: city })
+            this.fetchBreweryList(0)
+        }
+    }
+
     details = () => {
         if (this.state.selected === '') {
             return <div>
+                <input type="text" id='input' placeholder='City' onChange={this.updateCity} />
                 <Navigation navigate={this.navigate} page={this.state.page} />
                 {this.state.brews.map(brew => <BrewSummery loadBrew={this.loadBrew} key={brew.id} {...brew} />)}
                 <Navigation navigate={this.navigate} page={this.state.page} />

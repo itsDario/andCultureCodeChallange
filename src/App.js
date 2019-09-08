@@ -5,7 +5,7 @@ import HeaderContainer from './containers/HeaderContainer';
 
 
 class App extends Component {
-  // <BarContainer sushi={this.state.sushi} setEaten={this.setEaten} />
+
   render() {
     return (
       <div className="App">
